@@ -2,7 +2,7 @@ class BubblesController < ApplicationController
   include BucketScoped
 
   before_action :set_bubble, only: %i[ show edit update ]
-  before_action :clear_assignees_if_unassigned, only: :index
+  before_action :clear_assignees, only: :index
   before_action :set_view, :set_tag_filters, :set_assignee_filters, only: :index
 
   def index
@@ -43,7 +43,7 @@ class BubblesController < ApplicationController
       params.require(:bubble).permit(:title, :color, :due_on, :image, tag_ids: [])
     end
 
-    def clear_assignees_if_unassigned
+    def clear_assignees
       params[:assignee_ids] = nil if helpers.unassigned_filter_activated?
     end
 
