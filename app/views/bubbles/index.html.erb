@@ -1,5 +1,8 @@
 <% @page_title = @filter.plain_summary %>
 
+<% turbo_refreshes_with method: :morph, scroll: :preserve %>
+<%= render "filters/broadcasts", filter: @filter %>
+
 <% content_for :header do %>
   <nav class="align-start">
     <%= link_to root_path, class: "btn flex-item-justify-start" do %>
