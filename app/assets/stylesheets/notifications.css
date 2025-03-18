@@ -4,7 +4,7 @@
 
   block-size: var(--height);
   inline-size: var(--size);
-  inset: auto var(--inline-space) var(--block-space-half) auto;
+  inset: auto auto var(--block-space-half) var(--inline-space);
   padding: var(--block-space-half) var(--inline-space);
   position: fixed;
   z-index: 1;
@@ -99,6 +99,8 @@
 }
 
 .notification__content {
+  --border-radius: 0.2em;
+
   color: var(--color-ink);
 
   @media (prefers-color-scheme: dark) {

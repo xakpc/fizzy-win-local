@@ -13,11 +13,11 @@
   <% end %>
 
   <div class="notification-tray__actions flex align-center gap-half">
-    <%= button_to notifications_mark_all_read_path, class: "notification-tray__read_action btn flex-item-justify-start shadow", data: { action: "click->dialog#close", turbo_frame: "notifications" } do %>
+    <%= button_to notifications_mark_all_read_path, class: "notification-tray__read_action btn flex-item-justify-end shadow", data: { action: "click->dialog#close", turbo_frame: "notifications" } do %>
       Mark all as read
     <% end %>
 
-    <%= link_to notifications_path, class: "notification-tray__all_action btn flex-item-justify-end shadow", data: { action: "click->dialog#close"} do %>
+    <%= link_to notifications_path, class: "notification-tray__all_action btn flex-item-justify-start shadow", data: { action: "click->dialog#close"} do %>
       <%= image_tag "bell.svg", aria: { hidden: true }, size: 24 %>
       <span>See all notifications</span>
     <% end %>

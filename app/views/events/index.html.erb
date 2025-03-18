@@ -2,7 +2,10 @@
 
 <% content_for :header do %>
   <nav class="align-start">
-    <div class="btn btn--placeholder flex-item-justify-start"></div>
+    <header style="margin-inline-start: clamp(var(--inline-space), 3cqmin, calc(var(--inline-space) * 3))">
+      <h1 class="txt-x-large"><%= Current.account.name %></h1>
+    </header>
+
     <%= link_to account_users_path, class: "btn flex-item-justify-end" do %>
       <%= image_tag "settings.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Account settings</span>
@@ -12,7 +15,7 @@
 
 <div class="events__container align-start gap">
   <div class="flex flex-column">
-    <div class="flex align-center gap justify-space-between margin-block-end-half" style="padding-inline: calc(0.3em + 0.6em);">
+    <div class="flex align-center gap justify-space-between" style="padding: 0.7em calc(0.3em + 0.6em); background-color: var(--color-ink); color: var(--color-ink-reversed); margin-inline-end: 0.2em;">
       <h2 class="txt-large txt-nowrap">Latest activity</h2>
       <%= render "events/filter" %>
     </div>
@@ -22,7 +25,7 @@
   </div>
 
   <div class="txt-align-start">
-    <h2 class="txt-large txt-nowrap" style="margin-block-end: 0.5em;">Custom views</h2>
+    <h2 class="txt-large txt-nowrap" style="margin-block: 0.4em 0.5em;">Custom views</h2>
     <div style="border-block-start: 1px solid var(--color-subtle); padding-block-start: var(--block-space-half);">
       <% @filters.each do |filter| %>
         <h3 class="txt-medium margin-block-end-half txt-tight-lines">
@@ -46,5 +49,7 @@
     </div>
   </div>
 </div>
+
+<%= render "bubbles/pins/tray" %>
 
 <%= event_next_page_link(@next_day) %>

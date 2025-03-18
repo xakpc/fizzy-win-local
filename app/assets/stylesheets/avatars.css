@@ -18,7 +18,7 @@
     object-fit: cover;
   }
 
-   + .avatar {
+  .card & + .avatar {
     margin-inline-start: -0.8em;
   }
 }

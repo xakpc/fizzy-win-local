@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="pin-tray__actions flex align-center gap-half">
-    <%= tag.button type: "button", class: "pin-tray__all_action btn flex-item-justify-start shadow", data: { action: "click->dialog#close"} do %>
+    <%= tag.button type: "button", class: "pin-tray__all_action btn flex-item-justify-end shadow", data: { action: "click->dialog#close"} do %>
       <%= image_tag "pinned.svg", aria: { hidden: true }, size: 24 %>
       <span>See all pins</span>
     <% end %>

@@ -24,9 +24,12 @@
   background-color: var(--color-bg);
   border-radius: 2em;
   display: inline-flex;
+  font-size: 0.8em;
   inset: calc(var(--grid-lines) - 1em) auto -1em;
-  padding: 0.3em 1.3em 0.3em;
+  line-height: 1.5;
+  padding: 0.3em 1.3em;
   position: absolute;
+  text-transform: uppercase;
   transform: translateX(-50%);
   z-index: 2;
 }
@@ -59,7 +62,7 @@
 .event {
   --column-gap: 0.7ch;
   --panel-border-color: transparent;
-  --panel-border-radius: 0.5em;
+  --panel-border-radius: 0.2em;
   --panel-padding: 0.6em 1.2em 0.6em 0.6em;
   --panel-size: auto; 
 
@@ -89,7 +92,7 @@
 
   background-color: var(--color-container);
   font-size: 0.9em;
-  padding: 2em 0 1em;
+  padding: 1.5em 0 1em;
   text-transform: uppercase;
 }
 
@@ -97,7 +100,6 @@
   align-self: start;
   display: grid;
   font-weight: 600;
-  margin-block: var(--grid-lines);
 }
 
 .event__title {
@@ -110,8 +112,8 @@
   display: grid;
   gap: calc(var(--grid-lines) * 2);
   justify-items: center;
-  margin: var(--grid-lines);
-  padding: var(--grid-lines);
+  margin: var(--grid-lines) var(--grid-lines) calc(var(--grid-lines) * 6) var(--grid-lines);
+  padding: 0 var(--grid-lines);
 
   .event {
     grid-column-start: unset !important;

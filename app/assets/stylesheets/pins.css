@@ -4,7 +4,7 @@
 
   block-size: var(--height);
   inline-size: var(--size);
-  inset: auto auto var(--block-space-half) var(--inline-space);
+  inset: auto var(--inline-space) var(--block-space-half) auto;
   padding: var(--block-space-half) var(--inline-space);
   position: fixed;
   z-index: 1;
@@ -101,6 +101,7 @@
 .pin__content {
   color: var(--color-ink);
   border: 1px solid;
+  border-radius: 0.2em;
 
   .notificiations-list--read & {
     border: 1px solid var(--color-subtle);

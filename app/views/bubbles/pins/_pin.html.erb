@@ -6,10 +6,17 @@
           data: { action: "click->dialog#close", turbo_frame: "_top" } do %>
       <div class="flex flex-column txt-tight-lines min-width flex-item-grow">
         <strong class="overflow-ellipsis pin__title"><%= pin.bubble.title %></strong>
-        <div class="overflow-ellipsis" style="color: <%= pin.bubble.color %>">
-          <%= pin.bubble.bucket.name %>
-          <%= "· #" if pin.bubble.tags.any? %>
-          <%= pin.bubble.tags.map(&:title).join(", ") %>
+        <div class="flex gap-half">
+          <div class="overflow-ellipsis" style="color: <%= pin.bubble.color %>; font-weight: 500;">
+            <%= pin.bubble.bucket.name -%>
+            <%= " · #" if pin.bubble.tags.any? -%><%= pin.bubble.tags.map(&:title).join(", ") -%>
+          </div>
+
+          <% if pin.bubble&.stage %>
+            <div class="flex flex-column txt-uppercase border flex-item-justify-end" style="font-size: 0.8em; --border-color: currentColor; padding: 0.1em 0.4em;">
+              <%= pin.bubble&.stage&.name %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
