@@ -1,7 +1,7 @@
 module Filter::Fields
   extend ActiveSupport::Concern
 
-  INDEXES = %w[ most_discussed most_boosted newest oldest stalled popped ]
+  INDEXES = %w[ most_discussed most_boosted newest oldest stalled ]
 
   delegate :default_value?, to: :class
 
