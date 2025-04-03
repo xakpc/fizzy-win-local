@@ -1,0 +1,41 @@
+<div class="card-column__filter flex-inline center position-relative" data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+  <button class="txt-align-center input input--select borderless center txt-uppercase txt-medium margin-none-block-start margin-block-end" data-action="click->dialog#open:stop">
+    <strong class="overflow-ellipsis">
+      <% if filter.stages.any? %>
+        <%= filter.stages.map(&:name).to_sentence %>
+      <% else %>
+        Doing
+      <% end %>
+    </strong>
+  </button>
+
+  <dialog class="events__popup popup panel flex-column align-start gap-half fill-white shadow"
+    aria-label="In stage…" aria-description="In stage…"
+    data-dialog-target="dialog" data-action="turbo:before-cache@document->dialog#close">
+    <strong class="popup__title margin-block-start-half pad-inline-half">In stage(s)…</strong>
+    <%= form_with url: bubbles_path, method: :get, class: "flex flex-column full-width popup__list",
+          data: { controller: "form" } do |form| %>
+      <% filter.as_params.except(:stage_ids).each do |key, value| %>
+        <%= filter_hidden_field_tag key, value %>
+      <% end %>
+
+      <%= link_to bubbles_path(filter.as_params.except(:stage_ids)), class: "btn popup__item" do %>
+        <span class="overflow-ellipsis">All stages</span>
+      <% end %>
+
+      <% workflow.stages.each do |stage| %>
+        <div class="btn popup__item">
+          <%= form.check_box :stage_ids, {
+                multiple: true,
+                checked: filter.stages.include?(stage),
+                data: { action: "change->form#submit" },
+                include_hidden: false,
+          }, stage.id %>
+
+          <%= form.label :stage_ids, stage.name, for: form.field_id(:stage_ids, stage.id), class: "overflow-ellipsis" %>
+          <%= icon_tag "check", size: 18, class: "checked flex-item-justify-end" %>
+        </div>
+      <% end %>
+    <% end %>
+  </dialog>
+</div>

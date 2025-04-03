@@ -31,6 +31,14 @@ module Filter::Fields
     end
   end
 
+  def with(**fields)
+    dup.tap do |filter|
+      fields.each do |key, value|
+        filter.public_send("#{key}=", value)
+      end
+    end
+  end
+
   def default_indexed_by
     self.class.default_values[:indexed_by]
   end

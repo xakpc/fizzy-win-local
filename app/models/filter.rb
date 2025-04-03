@@ -19,7 +19,7 @@ class Filter < ApplicationRecord
   def bubbles
     @bubbles ||= begin
       result = creator.accessible_bubbles.indexed_by(indexed_by)
-      result = result.active unless indexed_by.popped?
+      result = indexed_by.popped? ? result.popped : result.active
       result = result.unassigned if assignment_status.unassigned?
       result = result.assigned_to(assignees.ids) if assignees.present?
       result = result.where(creator_id: creators.ids) if creators.present?
@@ -40,6 +40,10 @@ class Filter < ApplicationRecord
 
   def single_bucket
     buckets.first if buckets.one?
+  end
+
+  def single_workflow
+    buckets.first.workflow if buckets.pluck(:workflow_id).uniq.one?
   end
 
   def cacheable?

@@ -1,0 +1,12 @@
+<div class="margin-block">
+  <h2 class="txt-align-center flex-inline center txt-uppercase txt-medium margin-none">
+    Recently closed
+  </h2>
+  <section class="cards--grid">
+    <% if bubbles.any? %>
+      <%= render partial: "bubbles/card_preview", collection: bubbles, as: :bubble, cached: true %>
+    <% else %>
+      <p class="txt-medium translucent">Nothing here</p>
+    <% end %>
+  </section>
+</div>
