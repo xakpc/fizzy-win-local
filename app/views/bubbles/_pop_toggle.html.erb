@@ -11,7 +11,7 @@
       </button>
 
       <dialog class="popup panel flex-column align-start gap-half fill-white shadow" style="--row-gap: 0.2em;"
-          aria-label="In stage…" aria-description="In stage…"
+          aria-label="Close as…" aria-description="Close this card and select a reason.."
           data-dialog-target="dialog" data-action="turbo:before-cache@document->dialog#close">
         <strong class="popup__title margin-block-start-half pad-inline-half">Close as…</strong>
         <%= button_to bucket_bubble_pop_path(bubble.bucket, bubble), class: "btn popup__item full-width", form_class: "full-width" do %>
