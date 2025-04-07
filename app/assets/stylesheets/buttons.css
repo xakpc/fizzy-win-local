@@ -69,6 +69,7 @@
 
   /* Circle buttons */
   &.btn--circle,
+  &[aria-label]:where(:has(.icon)),
   &:where(:has(.for-screen-reader):has(.icon)) {
     --btn-border-radius: 50%;
     --btn-padding: 0;
