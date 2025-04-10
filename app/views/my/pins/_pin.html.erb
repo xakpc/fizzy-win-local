@@ -1,5 +1,5 @@
 <% cache pin do %>
-  <%= tag.div id: dom_id(pin), class: "pin tray__item flex txt-normal" do %>
+  <%= tag.div id: dom_id(pin), class: "pin tray__item txt-normal" do %>
     <%= link_to collection_card_path(pin.card.collection, pin.card),
           class: "pin__content shadow fill-white flex align-start txt-align-start gap flex-item-grow max-width border border-radius txt-ink overflow-clip",
           data: { action: "click->dialog#close", turbo_frame: "_top" },
