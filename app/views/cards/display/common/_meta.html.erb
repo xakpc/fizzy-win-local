@@ -20,7 +20,7 @@
       Reported by <strong><%= familiar_name_for(card.creator) %></strong>
     </span>
     <span class="card__meta-item card__meta-item--assigned overflow-ellipsis">
-      Assigned to <%= card.assignees.any? ? card.assignees.map { |assignee| "<strong>#{familiar_name_for(assignee)}</strong>" }.to_sentence.html_safe : "no one" %>
+      <%= card.assignees.any? ? card.assignees.map { |assignee| "Assigned to <strong>#{familiar_name_for(assignee)}</strong>" }.to_sentence.html_safe : "Not assigned" %>
     </span>
   </div>
 
