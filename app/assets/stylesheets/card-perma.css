@@ -15,7 +15,7 @@
       "qw notch-top we"
       "actions-left card actions-right"
       "er notch-bottom rt";
-    grid-template-columns: 48px minmax(0, 960px) 48px;
+    grid-template-columns: 48px minmax(0, 1120px) 48px;
     inline-size: fit-content;
     max-inline-size: 100%;
     margin-inline: auto;

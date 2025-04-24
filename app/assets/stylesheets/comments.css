@@ -12,7 +12,7 @@
     text-align: center;
 
     @media (min-width: 160ch) {
-      padding-inline: calc(var(--tray-size) + var(--inline-space) * 1.5);
+      padding-inline: var(--tray-size);
     }
   }
 
