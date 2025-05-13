@@ -5,7 +5,7 @@
     <div class="btn btn--circle btn--placeholder flex-item-justify-start"></div>
 
     <div class="events__index-header flex-inline flex-column center gap-half margin-block-end-double txt-align-center">
-      <h2 class="txt-large center overflow-ellipsis"><%= Account.sole.name %> / Latest activity</h2>
+      <h2 class="txt-large center overflow-ellipsis max-width"><%= Account.sole.name %> / Latest activity</h2>
       <%= render "events/filter", filter: @filter %>
     </div>
 

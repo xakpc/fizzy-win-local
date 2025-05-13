@@ -157,6 +157,8 @@
   }
 
   .events__index-header {
+    min-inline-size: 0;
+
     h2  {
       font-weight: 900;
     }
