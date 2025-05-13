@@ -40,9 +40,25 @@
     .card__stages {
       max-inline-size: 32ch;
     }
+
+    @media (max-width: 800px) {
+      --padding-inline: 3cqmin;
+
+      column-gap: 0;
+      grid-template-areas:
+        "notch-top notch-top"
+        "card card"
+        "actions-left actions-right"
+        "notch-bottom notch-bottom";
+      grid-template-columns: 1fr 1fr;
+      inline-size: calc(100% + 2 * var(--padding-inline));
+      margin-inline: calc(-1 * var(--padding-inline));
+      max-inline-size: none;
+      position: relative;
+    }
   }
 
-  /* Children
+  /* Child items
   /* ------------------------------------------------------------------------ */
 
   .card-perma__bg {
@@ -65,6 +81,21 @@
   .card-perma__actions--left { grid-area: actions-left; }
   .card-perma__actions--right { grid-area: actions-right; }
 
+  @media (max-width: 800px) {
+    .card-perma__actions {
+      display: flex;
+      inset-block-end: 0;
+      padding-inline: var(--padding-inline);
+      position: absolute;
+      translate: 0 50%;
+    }
+
+    .card-perma__actions--right {
+      inset-inline-end: 0;
+      justify-content: flex-end;
+    }
+  }
+
   /* Notches
   /* -------------------------------------------------------------------------- */
 
@@ -83,10 +114,11 @@
 
   .card-perma__notch--top {
     grid-area: notch-top;
-    inset-inline-start: 50%;
-    min-inline-size: 36ch;
-    position: absolute;
-    translate: -50% -50%;
+    inline-size: 100%;
+    margin-block-start: -4ch;
+    max-inline-size: 36ch;
+    padding-inline: 1ch;
+    translate: 0 50%;
 
     .btn {
       --btn-border-color: var(--card-color);
@@ -98,6 +130,10 @@
         --btn-background: var(--card-color);
         --btn-color: var(--color-ink-inverted);
       }
+    }
+
+    @media (max-width: 580px) {
+      margin-block-start: -2ch;
     }
   }
 
