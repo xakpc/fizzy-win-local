@@ -33,8 +33,8 @@
       <%= render "cards/display/preview/bubble", label: "Closes", days: card.days_until_close, class: "bubble--closing" %>
     <% end %>
 
-    <% if card.considering_soon? %>
-      <%= render "cards/display/preview/bubble", label: "Considering", days: card.days_until_close, class: "bubble--considering" %>
+    <% if card.reconsidering_soon? %>
+      <%= render "cards/display/preview/bubble", label: "Consider", days: card.days_until_close, class: "bubble--considering" %>
     <% end %>
   <% end %>
 <% end %>

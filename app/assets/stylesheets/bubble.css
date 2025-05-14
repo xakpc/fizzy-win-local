@@ -6,6 +6,7 @@
     --bubble-size-default: 4rem;
 
     block-size: var(--bubble-size, var(--bubble-size-default));
+    color: oklch(var(--lch-blue-darkest));
     container-type: inline-size;
     font-size: 1.75rem;
     font-weight: bold;
@@ -31,7 +32,7 @@
 
     svg {
       display: block;
-      letter-spacing: 0.125ch;
+      letter-spacing: 0.1ch;
       text-transform: uppercase;
     }
   }
