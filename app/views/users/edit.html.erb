@@ -6,55 +6,53 @@
   </nav>
 <% end %>
 
-<%= turbo_frame_tag dom_id(@user) do %>
-  <div class="panel shadow center">
-    <div class="flex flex-column gap txt-medium">
-      <%= form_with model: @user, method: :patch, class: "flex flex-column gap", data: { controller: "form upload-preview" } do |form| %>
-        <div class="align-center center avatar__form gap">
-          <span class="btn btn--placeholder txt-small"></span>
+<div class="panel shadow center">
+  <div class="flex flex-column gap txt-medium">
+    <%= form_with model: @user, method: :patch, class: "flex flex-column gap", data: { controller: "form upload-preview" } do |form| %>
+      <div class="align-center center avatar__form gap">
+        <span class="btn btn--placeholder txt-small"></span>
 
-          <label class="btn avatar input--file txt-xx-large center fill-white">
-            <%= image_tag user_avatar_path(@user), aria: { hidden: "true" }, class: "avatar", size: 128, data: { upload_preview_target: "image" } %>
-            <%= form.file_field :avatar, id: "file", class: "input", accept: "image/*",
-                  data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
-            <span class="for-screen-reader">Profile avatar for <%= @user.name %></span>
-          </label>
+        <label class="btn avatar input--file txt-xx-large center fill-white">
+          <%= image_tag user_avatar_path(@user), aria: { hidden: "true" }, class: "avatar", size: 128, data: { upload_preview_target: "image" } %>
+          <%= form.file_field :avatar, id: "file", class: "input", accept: "image/*",
+                data: { upload_preview_target: "input", action: "upload-preview#previewImage" } %>
+          <span class="for-screen-reader">Profile avatar for <%= @user.name %></span>
+        </label>
 
-          <% if @user.avatar.attached? %>
-            <%= tag.button type: :submit, form: "avatar-delete-form", class: "btn btn--negative txt-small", data: { turbo_confirm: "Are you sure you want to remove your avatar? This can't be undone." } do %>
-              <%= icon_tag "minus" %>
-              <span class="for-screen-reader">Delete avatar</span>
-            <% end %>
+        <% if @user.avatar.attached? %>
+          <%= tag.button type: :submit, form: "avatar-delete-form", class: "btn btn--negative txt-small", data: { turbo_confirm: "Are you sure you want to remove your avatar? This can't be undone." } do %>
+            <%= icon_tag "minus" %>
+            <span class="for-screen-reader">Delete avatar</span>
           <% end %>
-        </div>
+        <% end %>
+      </div>
 
-        <div class="flex align-center gap">
-          <label class="flex align-center gap input input--actor">
-            <%= form.text_field :name, class: "input full-width", autocomplete: "name", placeholder: "Name", autofocus: true, required: true, data: { "1p-ignore": true, action: "keydown.esc@document->form#cancel" } %>
-            <%= icon_tag "person", class: "txt-large" %>
-          </label>
-        </div>
-        <div class="flex align-center gap">
-          <label class="flex align-center gap input input--actor">
-            <%= form.email_field :email_address, class: "input full-width", autocomplete: "username", placeholder: "Email address", required: true %>
-            <%= icon_tag "email", class: "txt-large" %>
-          </label>
-        </div>
-        <div class="flex align-center gap">
-          <label class="flex align-center gap input input--actor">
-            <%= form.password_field :password, class: "input full-width", autocomplete: "new-password", placeholder: "Password", required: false, maxlength: 72 %>
-            <%= icon_tag "password", class: "txt-large" %>
-          </label>
-        </div>
-        <button type="submit" id="log_in" class="btn btn--reversed center">
-          <%= icon_tag "check" %>
-          <span>Save changes</span>
-        </button>
+      <div class="flex align-center gap">
+        <label class="flex align-center gap input input--actor">
+          <%= form.text_field :name, class: "input full-width", autocomplete: "name", placeholder: "Name", autofocus: true, required: true, data: { "1p-ignore": true, action: "keydown.esc@document->form#cancel" } %>
+          <%= icon_tag "person", class: "txt-large" %>
+        </label>
+      </div>
+      <div class="flex align-center gap">
+        <label class="flex align-center gap input input--actor">
+          <%= form.email_field :email_address, class: "input full-width", autocomplete: "username", placeholder: "Email address", required: true %>
+          <%= icon_tag "email", class: "txt-large" %>
+        </label>
+      </div>
+      <div class="flex align-center gap">
+        <label class="flex align-center gap input input--actor">
+          <%= form.password_field :password, class: "input full-width", autocomplete: "new-password", placeholder: "Password", required: false, maxlength: 72 %>
+          <%= icon_tag "password", class: "txt-large" %>
+        </label>
+      </div>
+      <button type="submit" id="log_in" class="btn btn--reversed center">
+        <%= icon_tag "check" %>
+        <span>Save changes</span>
+      </button>
 
-        <%= link_to "Cancel and go back", user_path(@user), data: { form_target: "cancel", turbo_frame: "_top" }, hidden: true %>
-      <% end %>
+      <%= link_to "Cancel and go back", user_path(@user), data: { form_target: "cancel", turbo_frame: "_top" }, hidden: true %>
+    <% end %>
 
-      <%= form_with url: user_avatar_url(@user), method: :delete, id: "avatar-delete-form" %>
-    </div>
+    <%= form_with url: user_avatar_url(@user), method: :delete, id: "avatar-delete-form" %>
   </div>
-<% end %>
+</div>

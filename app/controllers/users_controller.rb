@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UserTimelineScoped
   require_unauthenticated_access only: %i[ new create ]
 
   before_action :set_user, only: %i[ show edit update destroy ]
@@ -6,6 +7,7 @@ class UsersController < ApplicationController
   before_action :ensure_permission_to_change_user, only:  %i[ update destroy ]
 
   def index
+    @filters = Current.user.filters.all
     @users = User.active
   end
 
@@ -17,9 +19,6 @@ class UsersController < ApplicationController
     user = User.create!(user_params)
     start_new_session_for user
     redirect_to root_path
-  end
-
-  def show
   end
 
   def edit
