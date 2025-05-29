@@ -162,6 +162,10 @@
       --tray-item-margin: 0;
       --tray-item-scale: 1;
     }
+
+    .bubble {
+      display: none;
+    }
   }
 
   .tray__item--overflow {
