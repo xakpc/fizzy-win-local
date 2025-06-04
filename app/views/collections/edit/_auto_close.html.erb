@@ -4,3 +4,5 @@
 <%= form_with model: collection, data: { controller: "form" } do |form| %>
   <%= form.select :auto_close_period, collection_auto_close_options, {}, { class: "input input--select full-width margin-block-end", data: { action: "change->form#submit" } } %>
 <% end %>
+
+<%= render "collections/edit/knob", day_options: [3, 7, 30, 90, 365], default_index: 0, label: "Days until auto-close" %>

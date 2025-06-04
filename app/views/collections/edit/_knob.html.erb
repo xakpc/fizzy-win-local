@@ -1,0 +1,30 @@
+<fieldset class="knob" data-controller="knob" data-knob-target="wrapper" style="--knob-options: <%= day_options.length %>; --knob-index: <%= default_index %>;">
+  <div class="knob__options">
+    <% day_options.each_with_index do |value, i| %>
+      <label class="knob__option" style="--i: <%= i %>">
+        <input
+          data-action="change->knob#optionChanged"
+          data-index="<%= i %>"
+          <%= "checked" if value == day_options[default_index] %>
+          name="<%= label.dasherize %>"
+          type="radio"
+          value="<%= value %>"
+        />
+        <span><%= value %></span>
+      </label>
+    <% end %>
+  </div>
+
+  <legend class="knob__label"><%= label %></legend>
+
+  <div class="knob__knob" aria-hidden></div>
+</fieldset>
+
+
+<%#
+
+OK, the indicator needs to know what index position to point to
+We have --knob-index on the wrapper, set to the default.
+As the input changes, update that index.
+
+%>
