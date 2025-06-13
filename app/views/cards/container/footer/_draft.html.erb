@@ -1,4 +1,5 @@
 <div class="card-perma__notch card-perma__notch--bottom">
-  <%= button_to "Create card", card_publish_path(card), class: "btn" %>
-  <%= button_to "Save as draft", collection_card_path(card.collection, card), name: "card[status]", value: "drafted", method: :put, class: "btn btn--reversed" %>
+  <%= button_to "Create card", card_publish_path(card), name: "creation_type", value: "add", class: "btn" %>
+  <%= button_to "Create and add another", card_publish_path(card), method: :post, class: "btn btn--reversed", name: "creation_type", value: "add_another", form: { data: { turbo: false } } %>
+  <%= button_to "Save as a draft", collection_card_path(card.collection, card), name: "card[status]", value: "drafted", method: :put, class: "btn btn--reversed" %>
 </div>

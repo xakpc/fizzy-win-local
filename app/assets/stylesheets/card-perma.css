@@ -175,6 +175,7 @@
     .btn--reversed {
       --btn-background: var(--color-canvas);
       --btn-color: var(--card-color);
+      --btn-border-color: var(--color-container);
     }
   }
 

@@ -3,6 +3,12 @@ class Cards::PublishesController < ApplicationController
 
   def create
     @card.publish
-    redirect_to @card
+
+    redirect_to add_another_param? ? @collection.cards.create! : @card
   end
+
+  private
+    def add_another_param?
+      params[:creation_type] == "add_another"
+    end
 end
