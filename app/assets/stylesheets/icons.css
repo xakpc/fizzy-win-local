@@ -30,7 +30,10 @@
   .icon--camera { --svg: url("camera.svg "); }
   .icon--caret-down { --svg: url("caret-down.svg "); }
   .icon--check { --svg: url("check.svg "); }
+  .icon--clipboard { --svg: url("clipboard.svg "); }
   .icon--close { --svg: url("close.svg "); }
+  .icon--collection { --svg: url("collection.svg "); }
+  .icon--collection-add { --svg: url("collection-add.svg "); }
   .icon--comment { --svg: url("comment.svg "); }
   .icon--copy-paste { --svg: url("copy-paste.svg "); }
   .icon--crown { --svg: url("crown.svg "); }

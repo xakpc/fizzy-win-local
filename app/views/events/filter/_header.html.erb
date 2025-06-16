@@ -1,7 +1,37 @@
-<div class="flex align-center full-width gap-half">
-  <strong class="popup__title txt-medium">Collections</strong>
-  <button class="btn borderless txt-x-small flex-item-justify-end" data-action="click->dialog#close" >
-    <%= icon_tag "remove-med" %>
-    <span class="for-screen-reader">Close</span>
-  </button>
+<div class="flex flex-wrap align-center justify-center full-width max-width btn__group--chunky">
+  <%= link_to root_path, class: "btn popup__group borderless", data: { value: "home", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.1@document->hotkey#click keydown.shift+1@document->hotkey#click" } do %>
+    <%= icon_tag "home" %>
+    <span>Home</span>
+    <kbd>1</kbd>
+  <% end %>
+
+  <%= link_to cards_path(assignee_ids: [Current.user.id]), class: "btn popup__group borderless", data: {  value: "assigned to me", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.2@document->hotkey#click keydown.shift+2@document->hotkey#click" } do %>
+    <%= icon_tag "clipboard" %>
+    <span>Assigned to me</span>
+    <kbd>2</kbd>
+  <% end %>
+
+  <%= link_to cards_path(creator_ids: [Current.user.id]), class: "btn popup__group borderless", data: {  value: "added by me", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.3@document->hotkey#click keydown.shift+3@document->hotkey#click" } do %>
+    <%= icon_tag "person-add" %>
+    <span>Added by me</span>
+    <kbd>3</kbd>
+  <% end %>
+
+  <%= link_to new_collection_path, class: "btn popup__group borderless", data: {  value: "new collection", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.4@document->hotkey#click keydown.shift+4@document->hotkey#click" } do %>
+    <%= icon_tag "collection-add" %>
+    <span>New Collection</span>
+    <kbd>4</kbd>
+  <% end %>
+
+  <%= link_to notifications_path, class: "btn popup__group borderless", data: {  value: "notifications", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.5@document->hotkey#click keydown.shift+5@document->hotkey#click" } do %>
+    <%= icon_tag "bell" %>
+    <span>Notifications</span>
+    <kbd>5</kbd>
+  <% end %>
+
+  <%= link_to account_settings_path, class: "btn popup__group borderless", data: {  value: "account settings", filter_target: "item", navigable_list_target: "item", controller: "hotkey", action: "keydown.6@document->hotkey#click keydown.shift+6@document->hotkey#click" } do %>
+    <%= icon_tag "settings" %>
+    <span>Settings</span>
+    <kbd>6</kbd>
+  <% end %>
 </div>

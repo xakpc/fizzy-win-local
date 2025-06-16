@@ -18,17 +18,16 @@
         <strong class="txt-medium overflow-ellipsis margin-none">Fizzy</strong>
       <% end %>
 
-      <%= tag.dialog class:"filter popup popup--animated panel flex-column align-start gap-half fill-white shadow",
+      <%= tag.dialog class:"fizzy-dialog filter popup popup--animated panel flex-column align-start fill-white",
           data: {
             action: "turbo:before-cache@document->dialog#close keydown->navigable-list#navigate filter:changed->navigable-list#reset",
             controller: "filter navigable-list",
             dialog_target: "dialog",
             navigable_list_focus_on_selection_value: false,
             navigable_list_actionable_items_value: true } do %>
-        <%= render "events/filter/header" %>
-        <%= render "events/filter/new_collection_option" %>
         <%= text_field_tag :search, nil, placeholder: "Filter…", class: "input input--transparent txt-small", autofocus: true,
               type: "search", autocorrect: "off", autocomplete: "off", data: { "1p-ignore": "true", filter_target: "input", action: "input->filter#filter" } %>
+        <%= render "events/filter/header" %>
         <menu contents>
           <%= render "cards/index/collections_filter", filter: filter %>
         </menu>

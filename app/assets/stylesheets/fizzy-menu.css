@@ -1,3 +1,13 @@
+.fizzy-dialog {
+  --panel-border-color: var(--color-selected-dark);
+  --panel-border-radius: 1.4em;
+
+  box-shadow: 0 0 0 1px oklch(var(--lch-blue-medium) / 5%),
+              0 0.2em 0.2em oklch(var(--lch-blue-medium) / 5%),
+              0 0.4em 0.4em oklch(var(--lch-blue-medium) / 5%),
+              0 0.8em 0.8em oklch(var(--lch-blue-medium) / 5%);
+}
+
 .fizzy-menu {
   --input-border-color: var(--color-selected-dark);
   --input-padding: 0.2em 2em 0.2em 0.9em;

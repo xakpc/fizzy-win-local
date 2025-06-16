@@ -2,16 +2,9 @@
 
 <% content_for :header do %>
   <nav class="align-start">
-    <div class="btn btn--circle btn--placeholder flex-item-justify-start"></div>
-
     <header class="flex flex-inline flex-column center flex-shrink">
       <%= render "events/filter", filter: @filter %>
     </header>
-
-    <%= link_to account_settings_path, class: "btn flex-item-justify-end" do %>
-      <%= icon_tag "settings" %>
-      <span class="for-screen-reader">Account settings</span>
-    <% end %>
   </nav>
 <% end %>
 
