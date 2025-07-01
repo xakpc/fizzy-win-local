@@ -28,16 +28,24 @@
     }
   }
 
+  /* Workflow settings
+  /* ------------------------------------------------------------------------ */
+
   .workflow-preview {
     --border-size: 0.2em;
 
     aspect-ratio: 1;
+    border: 0.2em solid var(--color-ink-lighter);
     flex: 1 1 30%;
     max-inline-size: 30%;
 
-    button {
-      --hover-size: 0;
+    @media (any-hover: hover) {
+      &:hover:not(.workflow-preview--selected) {
+        border-color: var(--color-ink-light);
+      }
+    }
 
+    button {
       appearance: none;
       aspect-ratio: 1;
       background: transparent;
@@ -58,7 +66,7 @@
   }
 
   .workflow-preview--selected {
-    --border-color: var(--color-link);
+    border-color: var(--color-link);
   }
 
   .workflow-preview__swatch {

@@ -133,7 +133,6 @@
 
     .cards__filter {
       --filter-block-padding: 0.5rem;
-      --hover-size: 0;
 
       background-color: var(--color-canvas);
       border-radius: 99rem;

@@ -2,7 +2,7 @@
 <div class="flex justify-center margin-block-end">Use a Workflow to track progress in this Collection.</div>
 <div class="flex flex-wrap gap justify-center">
   <% Workflow.all.each do |workflow| %>
-    <div class="workflow-preview txt-align-start border border-radius <%= 'workflow-preview--selected' if workflow == collection.workflow %>">
+    <div class="workflow-preview txt-align-start border-radius <%= 'workflow-preview--selected' if workflow == collection.workflow %>">
       <%= button_to collection_workflow_path(collection), method: :patch do %>
         <%= hidden_field_tag "collection[workflow_id]", workflow.id %>
         <strong class="txt-small overflow-ellipsis flex-item-no-shrink"><%= workflow.name %></strong>
