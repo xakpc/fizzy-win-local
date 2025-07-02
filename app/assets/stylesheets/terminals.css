@@ -117,6 +117,10 @@
       color: var(--color-terminal-text-light);
     }
 
+    br {
+      display: none;
+    }
+
     .terminal--error & {
       accent-color: var(--color-negative);
       caret-color: var(--color-negative);
