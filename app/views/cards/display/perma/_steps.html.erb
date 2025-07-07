@@ -4,7 +4,7 @@
   <div class="step">
     <input type="checkbox" class="step__checkbox" disabled>
     <%= form_with model: [card, Step.new], url: card_steps_path(card) do |form| %>
-      <%= form.text_field :content, class: "input step__content", placeholder: "Add a step…", required: true, autocomplete: "off" %>
+      <%= form.text_field :content, class: "input step__content hide-focus-ring", placeholder: "Add a step…", required: true, autocomplete: "off" %>
     <% end %>
   </div>
 </ol>
