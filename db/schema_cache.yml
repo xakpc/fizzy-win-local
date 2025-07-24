@@ -451,7 +451,7 @@ columns:
     default_function:
     collation:
     comment:
-  - &34 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+  - &35 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
     name: title
     cast_type: *7
@@ -672,7 +672,7 @@ columns:
   - *6
   - *9
   event_activity_summaries:
-  - &32 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+  - &33 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
     name: content
     cast_type: *15
@@ -771,7 +771,7 @@ columns:
     comment:
   filters_tags:
   - *19
-  - &33 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+  - &34 !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
     name: tag_id
     cast_type: *3
@@ -1052,7 +1052,7 @@ columns:
     default_function:
     collation:
     comment:
-  - *32
+  - *33
   - *5
   - *6
   - *9
@@ -1060,12 +1060,12 @@ columns:
   - *22
   - *5
   - *6
-  - *33
+  - *34
   - *9
   tags:
   - *5
   - *6
-  - *34
+  - *35
   - *9
   users:
   - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
