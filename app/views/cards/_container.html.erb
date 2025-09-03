@@ -1,6 +1,7 @@
 <section id="<%= dom_id(card, :card_container) %>"
     class="card-perma" style="--card-color: <%= card.color %>;">
   <%= render "cards/container/engagement", card: card %>
+  <%= render "cards/container/status", card: card %>
 
   <aside class="card-perma__actions card-perma__actions--left" role="toolbar">
     <%= render "cards/container/gild", card: card if @card.published? && !@card.closed? %>

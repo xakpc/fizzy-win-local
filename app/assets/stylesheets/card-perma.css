@@ -142,6 +142,32 @@
     }
   }
 
+  .card__banner {
+    align-items: center;
+    background-color: var(--color-highlight);
+    border-radius: 2em;
+    color: color-mix(in srgb, var(--card-color) 40%, var(--color-ink));
+    display: inline-flex;
+    inline-size: auto;
+    gap: var(--inline-space-half);
+    grid-area: notch-top;
+    justify-content: center;
+    margin-block-start: -4ch;
+    margin-inline: auto;
+    max-inline-size: 36ch;
+    padding: var(--block-space-half) var(--block-space);
+    position: relative;
+    text-align: center;
+    translate: 0 50%;
+    z-index: 0;
+
+    .btn {
+      --btn-background: var(--card-color);
+      --btn-border-color: var(--card-color);
+      --btn-color: var(--color-ink-inverted);
+    }
+  }
+
   /* Notches
   /* -------------------------------------------------------------------------- */
 

@@ -9,27 +9,6 @@
 <% end %>
 
 <% content_for :header do %>
-  <% if @card.creating? && @card.can_recover_abandoned_creation? %>
-    <div class="fill-selected position-sticky flex align-center gap-half justify-center border-block margin-block-end"
-          style="view-transition-name: draft-banner; --card-color: <%= @card.color %>;">
-      You have an unsaved card. Would you like to continue where you left off?
-      <%= button_to card_recover_path(@card), class: "btn btn--reversed", data: { turbo_action: "replace" } do %>
-        <span>Restore</span>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @card.drafted? %>
-    <div class="fill-selected position-sticky flex align-center gap-half fill-highlight justify-center border-block margin-block-end"
-          style="view-transition-name: draft-banner;">
-      This is a draft, it’s only visible to you.
-
-      <%= button_to card_publish_path(@card), class: "btn txt-small btn--link", style: "--btn-background: #{@card.color}" do %>
-        <span>Post to project</span>
-      <% end %>
-    </div>
-  <% end %>
-
   <%= render "filters/menu", user_filtering: @user_filtering %>
 
   <%= link_to cards_path(collection_ids: [ @card.collection ]), class: "header__title btn borderless txt-large", style: "--btn-padding: 0.25ch 1ch 0.25ch 0.75ch; view-transistion-name: card-collection-title;", data: { controller: "hotkey", action: "keydown.esc@document->hotkey#click" } do %>
