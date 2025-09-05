@@ -1,7 +1,6 @@
 <section class="events__day" data-controller="related-element"
   data-related-element-highlight-class="event--related">
   <% if day_timeline.has_activity? %>
-    <div>highlights: <%= day_timeline.has_weekly_highlights? %></div>
     <div class="events__columns">
       <%= render "events/day_timeline_column", event_type: "added", day_timeline: day_timeline %>
       <%= render "events/day_timeline_column", event_type: "updated", day_timeline: day_timeline %>
