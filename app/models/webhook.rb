@@ -24,7 +24,9 @@ class Webhook < ApplicationRecord
   serialize :subscribed_actions, type: Array, coder: JSON
 
   scope :ordered, -> { order(name: :asc, id: :desc) }
+  scope :active, -> { where(active: true) }
   scope :triggered_by_action, ->(action) { where("subscribed_actions LIKE ?", "%\"#{action}\"%") }
+  scope :triggered_by, ->(event) { active.triggered_by_action(event.action) }
 
   # normalizes :subscribed_actions, with: ->(value) { Array(value).map(&:to_s).map(&:strip).reject(&:blank?).uniq & PERMITTED_ACTIONS }
 

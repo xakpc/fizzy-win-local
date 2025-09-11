@@ -5,9 +5,8 @@ class Webhook::Delivery < ApplicationRecord
   PRIVATE_IP_RANGES = [
     # IPv4 mapped to IPv6
     IPAddr.new("::ffff:0:0/96"),
-    # Link-local (DHCP and router stuff)
-    IPAddr.new("169.254.0.0/16"),
-    IPAddr.new("fe80::/10")
+    # Broadcasts
+    IPAddr.new("0.0.0.0/8")
   ].freeze
 
   belongs_to :webhook
@@ -18,7 +17,7 @@ class Webhook::Delivery < ApplicationRecord
   store :request, coder: JSON
   store :response, coder: JSON
 
-  scope :chronologically, -> { order created_at: :asc, id: :desc }
+  scope :chronologically, -> { order created_at: :asc, id: :asc }
 
   enum :state, %w[ pending in_progress completed errored ].index_by(&:itself), default: :pending
 
