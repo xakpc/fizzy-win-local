@@ -12,9 +12,9 @@ class FiltersControllerTest < ActionDispatch::IntegrationTest
         assignment_status: "unassigned",
         tag_ids: [ tags(:mobile).id ],
         assignee_ids: [ users(:jz).id ],
-        collection_ids: [ collections(:writebook).id ] }
+        collection_ids: [ collections(:writebook).id ] }, as: :turbo_stream
     end
-    assert_redirected_to cards_path(filter_id: Filter.last.id)
+    assert_response :success
 
     filter = Filter.last
     assert_predicate filter.indexed_by, :closed?
@@ -29,8 +29,8 @@ class FiltersControllerTest < ActionDispatch::IntegrationTest
     expected_params = filter.as_params
 
     assert_difference "users(:david).filters.count", -1 do
-      delete filter_path(filter)
+      delete filter_path(filter), as: :turbo_stream
     end
-    assert_redirected_to cards_path(expected_params)
+    assert_response :success
   end
 end
