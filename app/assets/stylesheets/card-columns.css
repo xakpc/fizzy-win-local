@@ -310,8 +310,7 @@
           color-mix(in oklch, var(--color-considering) 0%, transparent) 100%);
         content: "";
         inset: 0;
-        mask: radial-gradient(6px at 50% calc(100% + 3px), transparent calc(99% - 2px), black calc(101% - 2px) 99%, transparent 101%) calc(50% - 8px) calc(50% - 3px + .5px)/16px 6px,
-              radial-gradient(6px at 50% -3px, transparent calc(99% - 2px), black calc(101% - 2px) 99%, transparent 101%) 50% calc(50% + 3px)/16px 6px;
+        mask: var(--wavy-background-mask);
         position: absolute;
         z-index: 0;
       }

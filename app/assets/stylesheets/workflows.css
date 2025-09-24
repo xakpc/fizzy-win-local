@@ -7,6 +7,8 @@
 
     color: inherit;
     inline-size: 100%;
+    justify-content: flex-start;
+    text-transform: uppercase;
 
     @media (hover: hover) {
       &:hover {
@@ -24,6 +26,18 @@
       &:hover {
         --btn-background: var(--card-color);
       }
+    }
+  }
+
+  @supports(mask: radial-gradient(black)) {
+    .workflow-stage--stream:before {
+      background: white;
+      content: "";
+      inset: 0;
+      mask: var(--wavy-background-mask);
+      position: absolute;
+      z-index: 0;
+      opacity: 0.25;
     }
   }
 
