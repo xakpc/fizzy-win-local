@@ -92,6 +92,7 @@ module Authentication
     end
 
     def set_current_identity_token
+      link_identity(Current.user) if cookies.signed[:identity_token].nil? && Current.user.present?
       Current.identity_token = Identity::Mock.new(**cookies.signed[:identity_token])
     end
 
