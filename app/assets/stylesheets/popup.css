@@ -32,6 +32,10 @@
 
     &.orient-top {
       inset-block: auto 0;
+
+      &.orient-bottom {
+        inset-block: 0 auto;
+      }
     }
 
     &:has(.popup__footer) {
