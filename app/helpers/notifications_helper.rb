@@ -7,22 +7,23 @@ module NotificationsHelper
   end
 
   def event_notification_body(event)
-    name = event.creator.name
+    creator = event.creator.name
 
     case event_notification_action(event)
     when "card_assigned" then "Assigned to #{event.assignees.none? ? "self" : event.assignees.pluck(:name).to_sentence}"
-    when "card_unassigned" then "Unassigned by #{name}"
-    when "card_published" then "Added by #{name}"
-    when "card_closed" then %(Moved to "Done" by #{name})
-    when "card_reopened" then "Reopened by #{name}"
-    when "card_postponed" then %(Moved to "Not Now" by #{name})
+    when "card_unassigned" then "Unassigned by #{creator}"
+    when "card_published" then "Added by #{creator}"
+    when "card_closed" then %(Moved to "Done" by #{creator})
+    when "card_reopened" then "Reopened by #{creator}"
+    when "card_postponed" then %(Moved to "Not Now" by #{creator})
     when "card_auto_postponed" then %(Closed as "Not Now" due to inactivity)
-    when "card_title_changed" then "Renamed by #{name}"
-    when "card_board_changed" then "Moved by #{name}"
-    when "card_triaged" then "Triaged by #{name}"
-    when "card_sent_back_to_triage" then %(Moved back to "Maybe?" by #{name})
+    when "card_title_changed" then "Renamed by #{creator}"
+    when "card_board_changed" then "Moved by #{creator}"
+    when "card_triaged"
+      %(Moved to "#{event.particulars.dig("particulars", "column")}" by #{creator})
+    when "card_sent_back_to_triage" then %(Moved back to "Maybe?" by #{creator})
     when "comment_created" then comment_notification_body(event)
-    else name
+    else creator
     end
   end
 
