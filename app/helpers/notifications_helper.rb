@@ -10,11 +10,19 @@ module NotificationsHelper
     name = event.creator.name
 
     case event_notification_action(event)
-    when "card_closed" then "Moved to Done by #{name}"
-    when "card_reopened" then "Reopened by #{name}"
-    when "card_published" then "Added by #{name}"
-    when "comment_created" then comment_notification_body(event)
     when "card_assigned" then "Assigned to #{event.assignees.none? ? "self" : event.assignees.pluck(:name).to_sentence}"
+    when "card_unassigned" then "Unassigned by #{name}"
+    when "card_published" then "Added by #{name}"
+    when "card_closed" then %(Moved to "Done" by #{name})
+    when "card_reopened" then "Reopened by #{name}"
+    when "card_postponed" then %(Moved to "Not Now" by #{name})
+    when "card_auto_postponed" then %(Closed as "Not Now" due to inactivity)
+    when "card_resumed" then "Resumed by #{name}"
+    when "card_title_changed" then "Renamed by #{name}"
+    when "card_board_changed" then "Moved by #{name}"
+    when "card_triaged" then "Triaged by #{name}"
+    when "card_sent_back_to_triage" then %(Moved back to "Maybe?" by #{name})
+    when "comment_created" then comment_notification_body(event)
     else name
     end
   end
