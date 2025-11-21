@@ -60,6 +60,14 @@ export default class extends Controller {
     this.#setCurrentFrom(this.#visibleItems[this.#visibleItems.length - 1])
   }
 
+  deselectWhenClickingOutside(event) {
+    if (this.element.contains(event.target)) {
+      return
+    }
+
+    this.#clearSelection()
+  }
+
   // Public
 
   async selectItem(item, skipFocus = false) {

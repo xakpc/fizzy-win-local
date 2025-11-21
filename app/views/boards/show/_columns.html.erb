@@ -16,7 +16,8 @@
         dragover->drag-and-drop#dragOver
         dragenter->drag-and-strum#dragEnter
         drop->drag-and-drop#drop
-        dragend->drag-and-drop#dragEnd" } do %>
+        dragend->drag-and-drop#dragEnd
+        click@document->navigable-list#deselectWhenClickingOutside" } do %>
   <div class="card-columns__left">
     <%= render "boards/show/not_now", board: board %>
   </div>
