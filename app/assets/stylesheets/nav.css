@@ -189,9 +189,8 @@
       text-align: center;
 
       kbd {
-        border: none;
-        box-shadow: none;
         inset: 0.66em 0.33em auto auto;
+        line-height: 1.4;
         opacity: 0.5;
         position: absolute;
 
