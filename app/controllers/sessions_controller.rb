@@ -1,33 +1,30 @@
 class SessionsController < ApplicationController
   disallow_account_scope
-  require_unauthenticated_access except: :destroy
-  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_path, alert: "Try again later." }
+  allow_unauthenticated_access
 
   layout "public"
 
   def new
+    redirect_to_auto_setup_landing
   end
 
   def create
-    if identity = Identity.find_by_email_address(email_address)
-      redirect_to_session_magic_link identity.send_magic_link
-    else
-      signup = Signup.new(email_address: email_address)
-      if signup.valid?(:identity_creation)
-        redirect_to_session_magic_link signup.create_identity
-      else
-        head :unprocessable_entity
-      end
-    end
+    redirect_to_auto_setup_landing
   end
 
   def destroy
     terminate_session
-    redirect_to_logout_url
+    # Re-establish session immediately after logout
+    setup = AutoSetup.ensure_ready!(request: request)
+    set_current_session(setup.session)
+    redirect_to landing_path(script_name: setup.account.slug)
   end
 
   private
-    def email_address
-      params.expect(:email_address)
-    end
+
+  def redirect_to_auto_setup_landing
+    setup = AutoSetup.ensure_ready!(request: request)
+    set_current_session(setup.session) unless authenticated?
+    redirect_to landing_path(script_name: setup.account.slug)
+  end
 end

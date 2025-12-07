@@ -54,10 +54,18 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  config.assume_ssl = true
+  # Disabled for local use - no SSL required
+  config.assume_ssl = false
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # Disabled for local use - no SSL required
+  config.force_ssl = false
+
+  # Allow localhost for local production use
+  config.hosts = %w[localhost 127.0.0.1]
+
+  # Set host to be used by links generated in controller and mailer templates.
+  # For local use, uses request host/port automatically (no hardcoded values needed)
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)

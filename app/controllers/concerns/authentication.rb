@@ -37,12 +37,13 @@ module Authentication
 
     def require_account
       unless Current.account.present?
-        redirect_to session_menu_url(script_name: nil)
+        setup = AutoSetup.ensure_ready!(request: request)
+        redirect_to landing_path(script_name: setup.account.slug)
       end
     end
 
     def require_authentication
-      resume_session || request_authentication
+      resume_session || auto_create_and_resume_session
     end
 
     def resume_session
@@ -55,12 +56,13 @@ module Authentication
       Session.find_signed(cookies.signed[:session_token])
     end
 
-    def request_authentication
-      if Current.account.present?
-        session[:return_to_after_authenticating] = request.url
-      end
+    def auto_create_and_resume_session
+      setup = AutoSetup.ensure_ready!(request: request)
+      set_current_session(setup.session)
 
-      redirect_to_login_url
+      unless Current.account.present?
+        redirect_to landing_path(script_name: setup.account.slug)
+      end
     end
 
     def after_authentication_url
