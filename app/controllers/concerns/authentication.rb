@@ -38,7 +38,7 @@ module Authentication
     def require_account
       unless Current.account.present?
         setup = AutoSetup.ensure_ready!(request: request)
-        redirect_to landing_url(script_name: setup.account.slug)
+        redirect_to landing_path(script_name: setup.account.slug)
       end
     end
 
@@ -61,7 +61,7 @@ module Authentication
       set_current_session(setup.session)
 
       unless Current.account.present?
-        redirect_to landing_url(script_name: setup.account.slug)
+        redirect_to landing_path(script_name: setup.account.slug)
       end
     end
 

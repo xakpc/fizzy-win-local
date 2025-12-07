@@ -10,6 +10,6 @@ class Sessions::MenusController < ApplicationController
     @accounts = Current.identity&.accounts || [ setup.account ]
 
     # Always redirect to first/only account
-    redirect_to root_url(script_name: @accounts.first.slug)
+    redirect_to root_path(script_name: @accounts.first.slug)
   end
 end

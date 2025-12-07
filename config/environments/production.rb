@@ -65,15 +65,7 @@ Rails.application.configure do
   config.hosts = %w[localhost 127.0.0.1]
 
   # Set host to be used by links generated in controller and mailer templates.
-  # For local use, default to localhost:3000 (can be overridden via environment variables)
-  config.action_controller.default_url_options = {
-    host: ENV.fetch("HOST", "localhost"),
-    port: ENV.fetch("PORT", 3000)
-  }
-  config.action_mailer.default_url_options = {
-    host: ENV.fetch("HOST", "localhost"),
-    port: ENV.fetch("PORT", 3000)
-  }
+  # For local use, uses request host/port automatically (no hardcoded values needed)
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)

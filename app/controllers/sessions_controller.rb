@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     # Re-establish session immediately after logout
     setup = AutoSetup.ensure_ready!(request: request)
     set_current_session(setup.session)
-    redirect_to landing_url(script_name: setup.account.slug)
+    redirect_to landing_path(script_name: setup.account.slug)
   end
 
   private
@@ -25,6 +25,6 @@ class SessionsController < ApplicationController
   def redirect_to_auto_setup_landing
     setup = AutoSetup.ensure_ready!(request: request)
     set_current_session(setup.session) unless authenticated?
-    redirect_to landing_url(script_name: setup.account.slug)
+    redirect_to landing_path(script_name: setup.account.slug)
   end
 end
