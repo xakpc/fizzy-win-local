@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_12_01_100607) do
+ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
   create_table "accesses", id: :uuid, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "accessed_at"
     t.uuid "account_id", null: false
@@ -726,6 +726,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_01_100607) do
     t.string "name", null: false
     t.string "role", default: "member", null: false
     t.datetime "updated_at", null: false
+    t.datetime "verified_at"
     t.index ["account_id", "identity_id"], name: "index_users_on_account_id_and_identity_id", unique: true
     t.index ["account_id", "role"], name: "index_users_on_account_id_and_role"
     t.index ["identity_id"], name: "index_users_on_identity_id"

@@ -18,10 +18,13 @@ class JoinCodesController < ApplicationController
     if identity == Current.identity && user.setup?
       redirect_to landing_url(script_name: @join_code.account.slug)
     elsif identity == Current.identity
-      redirect_to new_users_join_url(script_name: @join_code.account.slug)
+      redirect_to new_users_verification_url(script_name: @join_code.account.slug)
     else
-      logout_and_send_new_magic_link(identity)
-      redirect_to session_magic_link_url(script_name: nil)
+      terminate_session if Current.identity
+
+      redirect_to_session_magic_link \
+        identity.send_magic_link,
+        return_to: new_users_verification_url(script_name: @join_code.account.slug)
     end
   end
 
@@ -36,14 +39,5 @@ class JoinCodesController < ApplicationController
       elsif !@join_code.active?
         render :inactive, status: :gone
       end
-    end
-
-    def logout_and_send_new_magic_link(identity)
-      terminate_session if Current.identity
-
-      magic_link = identity.send_magic_link
-      serve_development_magic_link(magic_link)
-
-      session[:return_to_after_authenticating] = new_users_join_url(script_name: @join_code.account.slug)
     end
 end

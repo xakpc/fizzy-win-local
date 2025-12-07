@@ -3,6 +3,11 @@ module SsrfProtection
 
   DNS_RESOLUTION_TIMEOUT = 2
 
+  DNS_NAMESERVERS = %w[
+    1.1.1.1
+    8.8.8.8
+  ]
+
   DISALLOWED_IP_RANGES = [
     IPAddr.new("0.0.0.0/8") # Broadcasts
   ].freeze
@@ -10,7 +15,7 @@ module SsrfProtection
   def resolve_public_ip(hostname)
     ip_addresses = resolve_dns(hostname)
     public_ips = ip_addresses.reject { |ip| private_address?(ip) }
-    public_ips.first&.to_s
+    public_ips.sort_by { |ipaddr| ipaddr.ipv4? ? 0 : 1 }.first&.to_s
   end
 
   def private_address?(ip)
@@ -22,7 +27,7 @@ module SsrfProtection
     def resolve_dns(hostname)
       ip_addresses = []
 
-      Resolv::DNS.open(timeouts: DNS_RESOLUTION_TIMEOUT) do |dns|
+      Resolv::DNS.open(nameserver: DNS_NAMESERVERS, timeouts: DNS_RESOLUTION_TIMEOUT) do |dns|
         dns.each_address(hostname) do |ip_address|
           ip_addresses << IPAddr.new(ip_address.to_s)
         end

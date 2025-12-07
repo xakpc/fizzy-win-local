@@ -138,6 +138,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resources :joins
+    resources :verifications, only: %i[ new create ]
   end
 
   resource :session do

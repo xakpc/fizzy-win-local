@@ -36,7 +36,7 @@ class JoinCodesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to session_magic_link_url(script_name: nil)
-    assert_equal new_users_join_url(script_name: @account.slug), session[:return_to_after_authenticating]
+    assert_equal new_users_verification_url(script_name: @account.slug), session[:return_to_after_authenticating]
   end
 
   test "create for existing identity" do
@@ -55,7 +55,7 @@ class JoinCodesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to landing_url(script_name: @account.slug)
   end
 
-  test "create for signed-in identity without a user in the account redirects to user setup" do
+  test "create for signed-in identity without a user in the account redirects to verification" do
     identity = identities(:mike)
     sign_in_as :mike
 
@@ -67,6 +67,19 @@ class JoinCodesControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    assert_redirected_to new_users_join_url(script_name: @account.slug)
+    assert_redirected_to new_users_verification_url(script_name: @account.slug)
+  end
+
+  test "create for different identity terminates existing session" do
+    sign_in_as :kevin
+
+    assert_difference -> { Identity.count }, 1 do
+      assert_difference -> { User.count }, 1 do
+        post join_path(code: @join_code.code, script_name: @account.slug), params: { email_address: "new_user@example.com" }
+      end
+    end
+
+    assert_redirected_to session_magic_link_url(script_name: nil)
+    assert_not_predicate cookies[:session_token], :present?
   end
 end

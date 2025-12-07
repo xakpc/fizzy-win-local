@@ -3,6 +3,21 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Email provider Settings
+  #
+  # Configure these according to whichever email provider you use. An example setup
+  # using SMTP looks like the following:
+  #
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.example.com', # The address of your email provider's SMTP server
+  #   port:                 2525,
+  #   domain:               'example.com',      # Your domain, which Fizzy will send email from
+  #   user_name:            ENV["SMTP_USERNAME"],
+  #   password:             ENV["SMTP_PASSWORD"],
+  #   authentication:       :plain,
+  #   enable_starttls_auto: true
+  # }
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 

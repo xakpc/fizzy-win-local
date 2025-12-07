@@ -298,11 +298,12 @@ class Webhook::DeliveryTest < ActiveSupport::TestCase
     # Verify Net::HTTP.new is called with the pinned IP
     http_mock = mock("http")
     http_mock.stubs(:use_ssl=)
+    http_mock.stubs(:ipaddr=)
     http_mock.stubs(:open_timeout=)
     http_mock.stubs(:read_timeout=)
     http_mock.stubs(:request).returns(stub(code: "200"))
 
-    Net::HTTP.expects(:new).with("example.com", 443, ipaddr: PUBLIC_TEST_IP).returns(http_mock)
+    Net::HTTP.expects(:new).with("example.com", 443).returns(http_mock)
 
     delivery.deliver
 

@@ -78,7 +78,8 @@ class Webhook::Delivery < ApplicationRecord
     end
 
     def http
-      Net::HTTP.new(uri.host, uri.port, ipaddr: resolved_ip).tap do |http|
+      Net::HTTP.new(uri.host, uri.port).tap do |http|
+        http.ipaddr = resolved_ip
         http.use_ssl = (uri.scheme == "https")
         http.open_timeout = ENDPOINT_TIMEOUT
         http.read_timeout = ENDPOINT_TIMEOUT
