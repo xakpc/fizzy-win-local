@@ -27,6 +27,12 @@ module Authorization
     end
 
     def ensure_can_access_account
+      # Auto-join user to account if needed
+      if Current.user.blank? && Current.identity.present? && Current.account.present?
+        Current.identity.join(Current.account, name: AutoSetup::DEFAULT_NAME)
+        Current.session = Current.session # Re-trigger user lookup
+      end
+
       redirect_to session_menu_url(script_name: nil) if Current.user.blank? || !Current.user.active?
     end
 

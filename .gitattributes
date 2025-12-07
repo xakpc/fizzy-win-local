@@ -8,4 +8,5 @@ vendor/* linguist-vendored
 config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
 
+# Enforce lf line ending 
 bin/* text eol=lf
