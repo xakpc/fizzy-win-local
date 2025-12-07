@@ -248,29 +248,40 @@ config.force_ssl = false
 config.hosts = %w[localhost 127.0.0.1]
 ```
 
-### URL Options
-```ruby
-config.action_controller.default_url_options = {
-  host: ENV.fetch("HOST", "localhost"),
-  port: ENV.fetch("PORT", 3000)
-}
-config.action_mailer.default_url_options = {
-  host: ENV.fetch("HOST", "localhost"),
-  port: ENV.fetch("PORT", 3000)
-}
-```
+### URL Generation
+Redirects use `_path` helpers (relative URLs) instead of `_url` helpers (absolute URLs) to avoid port/host issues when running behind proxies.
 
-### Running Locally in Production Mode
+---
+
+## Docker Deployment
+
+### Architecture
+The production Docker container uses:
+- **Thruster** (port 80) - HTTP proxy, handles static assets and compression
+- **Puma** (port 3000) - Rails application server
+
+Thruster listens on port 80 and forwards requests to Puma on port 3000 internally.
+
+### Port Mapping
+Map the external port to container port 80:
+
 ```bash
-# Default (localhost:3000)
-rails server -e production
+# docker run
+docker run -d -p 9461:80 fizzy
 
-# Custom port
-PORT=3006 rails server -e production
-
-# Custom host and port
-HOST=myhost PORT=8080 rails server -e production
+# docker-compose.yml
+services:
+  fizzy:
+    ports:
+      - "9461:80"
 ```
+
+This maps: `host:9461` → `container:80 (Thruster)` → `container:3000 (Puma)`
+
+### Important Notes
+- **Do not change Puma's default port 3000** - Thruster expects it
+- External port is configurable via Docker port mapping
+- Internal ports (3000, 80) are only visible inside the container
 
 ---
 
