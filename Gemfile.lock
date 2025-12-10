@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/basecamp/lexxy
+  revision: d292280b6d2c5d8a924327adf8bb9f0b25953539
+  specs:
+    lexxy (0.1.23.beta)
+      rails (>= 8.0.2)
+
+GIT
   remote: https://github.com/basecamp/useragent
   revision: 433ca320a42db1266c4b89df74d0abdb9a880c5e
   specs:
@@ -6,8 +13,8 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 3c3f6c8a253c8a0f346695374f927c9ab32fbefb
-  branch: main
+  revision: 0636a79d1bf268db6cdbbc6327106d08c3ff3751
+  branch: ast-immediate-variants-process-locally
   specs:
     actioncable (8.2.0.alpha)
       actionpack (= 8.2.0.alpha)
@@ -237,8 +244,6 @@ GEM
       logger (~> 1.6)
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
-    lexxy (0.1.23.beta)
-      rails (>= 8.0.2)
     lint_roller (1.1.0)
     logger (1.7.0)
     loofah (2.24.1)
@@ -267,7 +272,7 @@ GEM
       railties (>= 7.1)
       stimulus-rails
       turbo-rails
-    mittens (0.3.0)
+    mittens (0.3.1)
     mocha (2.8.2)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
@@ -518,7 +523,7 @@ DEPENDENCIES
   jbuilder
   kamal
   letter_opener
-  lexxy
+  lexxy!
   mission_control-jobs
   mittens
   mocha

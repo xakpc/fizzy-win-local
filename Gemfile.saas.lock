@@ -21,7 +21,7 @@ GIT
 
 GIT
   remote: https://github.com/basecamp/fizzy-saas
-  revision: 3b30f3d56d8318bb9256469cb91c06a5a5c760a6
+  revision: 43dbc896ce7b6a08194a92ddd1695d3f1ebf554b
   specs:
     fizzy-saas (0.1.0)
       audits1984
@@ -40,6 +40,13 @@ GIT
       yabeda-prometheus-mmap
       yabeda-puma-plugin
       yabeda-rails (>= 0.10)
+
+GIT
+  remote: https://github.com/basecamp/lexxy
+  revision: d292280b6d2c5d8a924327adf8bb9f0b25953539
+  specs:
+    lexxy (0.1.23.beta)
+      rails (>= 8.0.2)
 
 GIT
   remote: https://github.com/basecamp/queenbee-plugin
@@ -75,8 +82,8 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 690ec8898318b8f50714e86676353ebe1551261e
-  branch: main
+  revision: 0636a79d1bf268db6cdbbc6327106d08c3ff3751
+  branch: ast-immediate-variants-process-locally
   specs:
     actioncable (8.2.0.alpha)
       actionpack (= 8.2.0.alpha)
@@ -292,7 +299,7 @@ GEM
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
     jmespath (1.6.2)
-    json (2.16.0)
+    json (2.17.1)
     jwt (3.1.2)
       base64
     kamal (2.9.0)
@@ -313,8 +320,6 @@ GEM
       logger (~> 1.6)
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
-    lexxy (0.1.23.beta)
-      rails (>= 8.0.2)
     lint_roller (1.1.0)
     logger (1.7.0)
     loofah (2.24.1)
@@ -552,7 +557,7 @@ GEM
       ostruct
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
-    stringio (3.1.8)
+    stringio (3.1.9)
     thor (1.4.0)
     thruster (0.1.16)
     thruster (0.1.16-aarch64-linux)
@@ -653,7 +658,7 @@ DEPENDENCIES
   jbuilder
   kamal
   letter_opener
-  lexxy
+  lexxy!
   mission_control-jobs
   mittens
   mocha

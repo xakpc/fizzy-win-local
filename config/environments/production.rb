@@ -5,18 +5,20 @@ Rails.application.configure do
 
   # Email provider Settings
   #
-  # Configure these according to whichever email provider you use. An example setup
-  # using SMTP looks like the following:
-  #
-  # config.action_mailer.smtp_settings = {
-  #   address:              'smtp.example.com', # The address of your email provider's SMTP server
-  #   port:                 2525,
-  #   domain:               'example.com',      # Your domain, which Fizzy will send email from
-  #   user_name:            ENV["SMTP_USERNAME"],
-  #   password:             ENV["SMTP_PASSWORD"],
-  #   authentication:       :plain,
-  #   enable_starttls_auto: true
-  # }
+  # SMTP setting can be configured via environment variables.
+  # For other configuration options, consult the Action Mailer documentation.
+  if smtp_address = ENV["SMTP_ADDRESS"].presence
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: smtp_address,
+      port: ENV.fetch("SMTP_PORT", "587").to_i,
+      domain: ENV.fetch("SMTP_DOMAIN", nil),
+      user_name: ENV.fetch("SMTP_USERNAME", nil),
+      password: ENV.fetch("SMTP_PASSWORD", nil),
+      authentication: ENV.fetch("SMTP_AUTHENTICATION", "plain"),
+      enable_starttls_auto: ENV.fetch("SMTP_ENABLE_STARTTLS_AUTO", "true") == "true"
+    }
+  end
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -39,6 +41,12 @@ Rails.application.configure do
   config.public_file_server.headers = {
     "Cache-Control" => "public, max-age=#{1.year.to_i}"
   }
+
+  # Select Active Storage service via env var; default to local disk.
+  # Don't overwrite if it's already been set (e.g. by fizzy-saas)
+  if config.active_storage.service.blank?
+    config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "local").to_sym
+  end
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -63,9 +71,6 @@ Rails.application.configure do
 
   # Allow localhost for local production use
   config.hosts = %w[localhost 127.0.0.1]
-
-  # Set host to be used by links generated in controller and mailer templates.
-  # For local use, uses request host/port automatically (no hardcoded values needed)
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)

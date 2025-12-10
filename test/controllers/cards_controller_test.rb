@@ -132,4 +132,42 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
     get card_path(card)
     assert_response :success
   end
+
+  test "show as JSON" do
+    get card_path(cards(:logo)), as: :json
+    assert_response :success
+    assert_equal cards(:logo).title, @response.parsed_body["title"]
+  end
+
+  test "create as JSON" do
+    assert_difference -> { Card.count }, +1 do
+      post board_cards_path(boards(:writebook)),
+        params: { card: { title: "My new card", description: "Big if true", tag_ids: [ tags(:web).id, tags(:mobile).id ] } },
+        as: :json
+    end
+
+    assert_response :created
+    assert_equal card_path(Card.last, format: :json), @response.headers["Location"]
+
+    card = Card.last
+    assert_equal "My new card", card.title
+    assert_equal "Big if true", card.description.to_plain_text
+    assert_equal [ tags(:mobile), tags(:web) ].sort, card.tags.sort
+  end
+
+  test "update as JSON" do
+    card = cards(:logo)
+    put card_path(card, format: :json), params: { card: { title: "Update test" } }
+
+    assert_response :success
+    assert_equal "Update test", card.reload.title
+  end
+
+  test "delete as JSON" do
+    card = cards(:logo)
+    delete card_path(card, format: :json)
+
+    assert_response :no_content
+    assert_not Card.exists?(card.id)
+  end
 end

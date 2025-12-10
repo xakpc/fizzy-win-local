@@ -149,6 +149,7 @@
     border-radius: 0.5ch;
     box-shadow: var(--shadow);
     display: flex;
+    flex-wrap: wrap;
     inset-inline-end: 0;
     padding: 4px;
     position: absolute;
@@ -233,10 +234,11 @@
     background: var(--color-canvas);
     border: none;
     border-radius: 0.5ch;
+    color: inherit;
     display: grid;
     font-weight: 500;
     inline-size: var(--lexxy-dropdown-btn-size);
-    place-items: center;
+    place-content: center;
     position: relative;
     outline: none;
 
@@ -293,6 +295,10 @@
 
     max-height: 200px;
     overflow: scroll;
+  
+    &:is(.lexxy-prompt-menu--visible) {
+      padding: var(--lexxy-prompt-padding);
+    }
   }
 
   .lexxy-prompt-menu--visible {

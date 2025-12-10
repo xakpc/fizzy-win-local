@@ -219,6 +219,15 @@
     }
   }
 
+  .nav__blank-slate {
+    font-size: var(--text-small);
+    margin: 1rem auto;
+
+    .nav:has(.popup__item:not([hidden])) & {
+      display: none;
+    }
+  }
+
   .nav__footer {
     background-color: var(--color-canvas);
     border-block-start: 1px solid var(--color-ink-lighter);
