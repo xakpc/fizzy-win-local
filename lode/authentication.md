@@ -285,6 +285,39 @@ This maps: `host:9461` → `container:80 (Thruster)` → `container:3000 (Puma)`
 
 ---
 
+## Design Decisions
+
+### Local-Only Single-User Architecture (December 2024)
+
+During merge conflict resolution, we explicitly chose to reject API bearer token authentication in favor of the auto-setup approach. This decision reinforces the core design:
+
+**Rejected approach (from upstream):**
+```ruby
+def require_authentication
+  resume_session || authenticate_by_bearer_token || request_authentication
+end
+```
+
+**Chosen approach (local-only):**
+```ruby
+def require_authentication
+  resume_session || auto_create_and_resume_session
+end
+```
+
+**Rationale:**
+- This is a local-only, single-user application
+- No need for API access tokens or multi-user authentication
+- Auto-setup provides seamless, zero-configuration experience
+- Eliminates complexity of token management and API security
+
+**Also rejected:**
+- `Identity::AccessToken` model and related controllers
+- Bearer token validation in `Identity.find_by_permissable_access_token`
+- Access token management UI (`/my/access_tokens`)
+
+---
+
 ## Security Considerations
 
 ### Current System
@@ -292,6 +325,7 @@ This maps: `host:9461` → `container:80 (Thruster)` → `container:3000 (Puma)`
 - Sessions use signed permanent cookies (httponly, same_site: lax)
 - Single local user - appropriate for self-hosted/local deployments
 - SSL disabled for local use
+- No API tokens - reduces attack surface
 
 ### Original System (if restored)
 - Magic links expire in 15 minutes
