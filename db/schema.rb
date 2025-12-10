@@ -321,6 +321,16 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
     t.index ["email_address"], name: "index_identities_on_email_address", unique: true
   end
 
+  create_table "identity_access_tokens", id: :uuid, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.uuid "identity_id", null: false
+    t.string "permission"
+    t.string "token"
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_access_token_on_identity_id"
+  end
+
   create_table "magic_links", id: :uuid, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "code", null: false
     t.datetime "created_at", null: false

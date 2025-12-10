@@ -10,7 +10,7 @@
   --block-space-double: calc(var(--block-space) * 2);
 
   /* Text */
-  --font-sans: system-ui;
+  --font-sans: -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: ui-serif, serif;
   --font-mono: ui-monospace, monospace;
 

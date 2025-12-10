@@ -82,4 +82,16 @@ class JoinCodesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to session_magic_link_url(script_name: nil)
     assert_not_predicate cookies[:session_token], :present?
   end
+
+  test "create with invalid email address" do
+    # Avoid Sentry exceptions when attackers try to stuff invalid emails into the system
+    without_action_dispatch_exception_handling do
+      assert_no_difference -> { Identity.count } do
+        assert_no_difference -> { User.count } do
+          post join_path(code: @join_code.code, script_name: @account.slug), params: { email_address: "not-a-valid-email" }
+        end
+      end
+      assert_response :unprocessable_entity
+    end
+  end
 end
