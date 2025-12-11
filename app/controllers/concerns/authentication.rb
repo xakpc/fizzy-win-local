@@ -43,7 +43,7 @@ module Authentication
     end
 
     def require_authentication
-      resume_session || auto_create_and_resume_session
+      resume_session || authenticate_by_bearer_token || auto_create_and_resume_session
     end
 
     def resume_session
@@ -54,6 +54,16 @@ module Authentication
 
     def find_session_by_cookie
       Session.find_signed(cookies.signed[:session_token])
+    end
+
+    def authenticate_by_bearer_token
+      if request.authorization.to_s.include?("Bearer")
+        authenticate_or_request_with_http_token do |token|
+          if identity = Identity.find_by_permissable_access_token(token, method: request.method)
+            Current.identity = identity
+          end
+        end
+      end
     end
 
     def auto_create_and_resume_session

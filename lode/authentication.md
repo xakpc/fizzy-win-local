@@ -287,34 +287,37 @@ This maps: `host:9461` → `container:80 (Thruster)` → `container:3000 (Puma)`
 
 ## Design Decisions
 
-### Local-Only Single-User Architecture (December 2024)
+### Hybrid Authentication (December 2024)
 
-During merge conflict resolution, we explicitly chose to reject API bearer token authentication in favor of the auto-setup approach. This decision reinforces the core design:
+Authentication supports both auto-setup for web UI and bearer tokens for API:
 
-**Rejected approach (from upstream):**
 ```ruby
 def require_authentication
-  resume_session || authenticate_by_bearer_token || request_authentication
+  resume_session || authenticate_by_bearer_token || auto_create_and_resume_session
 end
 ```
 
-**Chosen approach (local-only):**
+**Flow:**
+1. `resume_session` - Check for session cookie (web users)
+2. `authenticate_by_bearer_token` - Check for Bearer token (API users)
+3. `auto_create_and_resume_session` - Fall back to auto-setup (new web users)
+
+**Bearer token authentication:**
 ```ruby
-def require_authentication
-  resume_session || auto_create_and_resume_session
+def authenticate_by_bearer_token
+  if request.authorization.to_s.include?("Bearer")
+    authenticate_or_request_with_http_token do |token|
+      if identity = Identity.find_by_permissable_access_token(token, method: request.method)
+        Current.identity = identity
+      end
+    end
+  end
 end
 ```
 
-**Rationale:**
-- This is a local-only, single-user application
-- No need for API access tokens or multi-user authentication
-- Auto-setup provides seamless, zero-configuration experience
-- Eliminates complexity of token management and API security
+**Key point:** API requests with different user tokens will create cards/comments under the correct user. Without bearer token auth, all API requests would use the auto-setup default user.
 
-**Also rejected:**
-- `Identity::AccessToken` model and related controllers
-- Bearer token validation in `Identity.find_by_permissable_access_token`
-- Access token management UI (`/my/access_tokens`)
+See `lode/local-development.md` for creating tokens via Rails console.
 
 ---
 
